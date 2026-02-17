@@ -4,109 +4,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💬 Discuții Politice - Vocea Ta Contă</title>
+    <title>🏛️ Forum Politic - Vocea Ta Contă</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
             color: #333;
         }
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 20px auto;
             padding: 20px;
             background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
         header {
             text-align: center;
-            padding: 20px;
-            background: #2c3e50;
+            padding: 25px;
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
             color: white;
-            border-radius: 8px 8px 0 0;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
         }
-        h1 { margin: 0; }
+        h1 { margin: 0; font-size: 2.2em; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+
+        /* Cadre pentru subiecte */
+        .topic-card {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-left: 6px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .topic-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        .topic-title::before {
+            content: "🏛️";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Posturi */
         .post {
             padding: 15px;
-            margin: 15px 0;
+            margin: 10px 0;
             background: #ecf0f1;
             border-left: 4px solid #3498db;
             border-radius: 5px;
+            position: relative;
         }
+        .post-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .post-date {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        /* Formular */
         .form-container {
             margin-top: 30px;
             padding: 20px;
             background: #eaf2f8;
             border-radius: 8px;
+            border: 1px solid #bdc3c7;
         }
         input, textarea, button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 16px;
+            box-sizing: border-box;
         }
         button {
             background: #3498db;
             color: white;
             cursor: pointer;
             border: none;
+            font-weight: bold;
+            padding: 12px;
         }
         button:hover {
             background: #2980b9;
         }
+
+        /* Reguli */
         .rules {
             margin-top: 20px;
             padding: 15px;
             background: #f9f9f9;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 14px;
+            line-height: 1.5;
+        }
+        .rules strong {
+            color: #e74c3c;
+        }
+
+        /* Selectie subiect */
+        .topic-selector {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+        .topic-selector select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Responsiv */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 { font-size: 1.8em; }
+            .topic-title { font-size: 1.2em; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>💬 Discuții Politice</h1>
-            <p>Vocea ta contează — exprimă-te cu respect, ascultă cu deschidere.</p>
+            <h1>🏛️ Forum Politic</h1>
+            <p>Discută, propune, schimbă — vocea ta contează.</p>
         </header>
 
-        <div id="posts-container">
-            <!-- Posturi predefinite -->
-            <div class="post">
-                <strong>Ion Popescu</strong><br>
-                Cred că educația este cheia reformei politice. Fără o populație informată, nu putem avea democrație reală.
-            </div>
-            <div class="post">
-                <strong>Maria Ionescu</strong><br>
-                Sunt de părere că justiția trebuie independentizată complet. Nu mai vrem politicieni care controlează judecătorii.
+        <!-- Subiect 1: Educație -->
+        <div class="topic-card" id="topic-edu">
+            <h2 class="topic-title">Educația în România</h2>
+            <div class="posts-list" id="edu-posts">
+                <div class="post">
+                    <span class="post-author">Ana Popescu</span><br>
+                    Trebuie să investim în profesori, nu doar în clădiri. Un profesor motivat = elevi inspirați.
+                    <div class="post-date">Postat azi, 14:30</div>
+                </div>
             </div>
         </div>
 
+        <!-- Subiect 2: Justiție -->
+        <div class="topic-card" id="topic-just">
+            <h2 class="topic-title">Justiția Independentă</h2>
+            <div class="posts-list" id="just-posts">
+                <div class="post">
+                    <span class="post-author">Mihai Ionescu</span><br>
+                    Nu putem avea democrație dacă judecătorii sunt controlați de politicieni. Independența e esențială.
+                    <div class="post-date">Postat ieri, 09:15</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subiect 3: Economie -->
+        <div class="topic-card" id="topic-econ">
+            <h2 class="topic-title">Economia și Impozitele</h2>
+            <div class="posts-list" id="econ-posts">
+                <div class="post">
+                    <span class="post-author">Elena Georgescu</span><br>
+                    Impozitele ar trebui reduse pentru micii antreprenori. Sunt motorul economiei reale.
+                    <div class="post-date">Postat 2 zile în urmă, 18:45</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formular pentru adăugare opinie -->
         <div class="form-container">
             <h3>Adaugă o opinie</h3>
             <input type="text" id="name" placeholder="Numele tău" required>
+            <div class="topic-selector">
+                <label for="topic">Alege subiectul:</label>
+                <select id="topic">
+                    <option value="edu">Educația în România</option>
+                    <option value="just">Justiția Independentă</option>
+                    <option value="econ">Economia și Impozitele</option>
+                </select>
+            </div>
             <textarea id="opinion" placeholder="Scrie opinia ta... (min. 50 de caractere)" rows="5" required></textarea>
             <button onclick="addOpinion()">Postează</button>
         </div>
 
         <div class="rules">
             <strong>Reguli de participare:</strong><br>
-            • Respectă toți participanții<br>
-            • Nu folosi limbaj vulgar sau amenințări<br>
+            • Respectă toți participanții — chiar dacă nu ești de acord<br>
+            • Nu folosi limbaj vulgar, amenințări sau mesaje de ură<br>
             • Nu postează linkuri externe fără motiv valid<br>
-            • Opiniile sunt moderate după publicare (dacă e nevoie)
+            • Opiniile sunt moderate după publicare (dacă e nevoie)<br>
+            • Fii concis și constructiv — discuția e mai importantă decât „câștigarea” ei.
         </div>
     </div>
 
     <script>
         function addOpinion() {
             const name = document.getElementById('name').value.trim();
+            const topic = document.getElementById('topic').value;
             const opinion = document.getElementById('opinion').value.trim();
 
             if (name === '' || opinion === '') {
@@ -119,11 +232,21 @@
                 return;
             }
 
+            // Creează postul
             const post = document.createElement('div');
             post.className = 'post';
-            post.innerHTML = `<strong>${escapeHtml(name)}</strong><br>${escapeHtml(opinion)}`;
+            const now = new Date();
+            const dateStr = now.toLocaleString('ro-RO');
 
-            document.getElementById('posts-container').prepend(post);
+            post.innerHTML = `
+                <span class="post-author">${escapeHtml(name)}</span><br>
+                ${escapeHtml(opinion)}
+                <div class="post-date">Postat ${dateStr}</div>
+            `;
+
+            // Adaugă postul în secțiunea corespunzătoare
+            const targetContainer = document.getElementById(`${topic}-posts`);
+            targetContainer.prepend(post);
 
             // Resetează formularul
             document.getElementById('name').value = '';
