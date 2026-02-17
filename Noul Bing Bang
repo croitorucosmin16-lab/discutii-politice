@@ -1,0 +1,143 @@
+```html
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💬 Discuții Politice - Vocea Ta Contă</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 8px 8px 0 0;
+        }
+        h1 { margin: 0; }
+        .post {
+            padding: 15px;
+            margin: 15px 0;
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            border-radius: 5px;
+        }
+        .form-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #eaf2f8;
+            border-radius: 8px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .rules {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💬 Discuții Politice</h1>
+            <p>Vocea ta contează — exprimă-te cu respect, ascultă cu deschidere.</p>
+        </header>
+
+        <div id="posts-container">
+            <!-- Posturi predefinite -->
+            <div class="post">
+                <strong>Ion Popescu</strong><br>
+                Cred că educația este cheia reformei politice. Fără o populație informată, nu putem avea democrație reală.
+            </div>
+            <div class="post">
+                <strong>Maria Ionescu</strong><br>
+                Sunt de părere că justiția trebuie independentizată complet. Nu mai vrem politicieni care controlează judecătorii.
+            </div>
+        </div>
+
+        <div class="form-container">
+            <h3>Adaugă o opinie</h3>
+            <input type="text" id="name" placeholder="Numele tău" required>
+            <textarea id="opinion" placeholder="Scrie opinia ta... (min. 50 de caractere)" rows="5" required></textarea>
+            <button onclick="addOpinion()">Postează</button>
+        </div>
+
+        <div class="rules">
+            <strong>Reguli de participare:</strong><br>
+            • Respectă toți participanții<br>
+            • Nu folosi limbaj vulgar sau amenințări<br>
+            • Nu postează linkuri externe fără motiv valid<br>
+            • Opiniile sunt moderate după publicare (dacă e nevoie)
+        </div>
+    </div>
+
+    <script>
+        function addOpinion() {
+            const name = document.getElementById('name').value.trim();
+            const opinion = document.getElementById('opinion').value.trim();
+
+            if (name === '' || opinion === '') {
+                alert("Te rugăm completează toate câmpurile.");
+                return;
+            }
+
+            if (opinion.length < 50) {
+                alert("Opinia trebuie să aibă cel puțin 50 de caractere.");
+                return;
+            }
+
+            const post = document.createElement('div');
+            post.className = 'post';
+            post.innerHTML = `<strong>${escapeHtml(name)}</strong><br>${escapeHtml(opinion)}`;
+
+            document.getElementById('posts-container').prepend(post);
+
+            // Resetează formularul
+            document.getElementById('name').value = '';
+            document.getElementById('opinion').value = '';
+
+            alert("Mulțumim pentru contribuția ta! Opinia ta a fost adăugată.");
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
+```
